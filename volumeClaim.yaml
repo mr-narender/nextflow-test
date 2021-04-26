@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nextflow-volume
+  labels:
+    app: nextflow-volume
+    type: local
+spec:
+  storageClassName: cinder
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextflow-volume
+  labels:
+    app: nextflow-volume
+    type: local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  volumeName: nextflow-volume
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: cinder
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nextflow-pod-volume
+  labels:
+    app: nextflow-pod-volume
+    type: local
+spec:
+  storageClassName: cinder
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextflow-pod-volume
+  labels:
+    app: nextflow-pod-volume
+    type: local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  volumeName: nextflow-pod-volume
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: cinder
