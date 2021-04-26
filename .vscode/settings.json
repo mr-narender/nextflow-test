@@ -1,0 +1,23 @@
+{
+  "python.pythonPath": "/Users/narender/.pyenv/versions/3.10.0a6/bin/python",
+  "python.testing.promptToConfigure": false,
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "actionButtons": {
+    "defaultColor": "#ff0034", // Can also use string color names.
+    "loadNpmCommands": false, // Disables automatic generation of actions for npm commands.
+    "reloadButton": "♻️", // Custom reload button text or icon (default ↻). null value enables automatic reload on configuration change
+    "commands": [
+      {
+        "cwd": "${workspaceFolder}", // Terminal initial folder ${workspaceFolder} and os user home as defaults
+        "name": "Git Commit and Push",
+        "color": "white",
+        "singleInstance": true,
+        "command": "git commit -am 'Init to nextflow test' --amend && git push -f && sleep 1 && exit" // This is executed in the terminal.
+      }
+    ]
+},
+"window.zoomLevel": 1,
+"editor.fontSize": 13
+}
