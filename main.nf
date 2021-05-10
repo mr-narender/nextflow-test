@@ -4,7 +4,7 @@ params.volumeClaim = 'pvc-nextflow'
 params.mountPath = '/workspace/ubuntu/'
 params.subPath = 'work'
 
-commands = ['command1', 'command2', 'command3',]
+commands = ['pwd', 'pwd', 'pwd',]
 
 log.info """\
 
@@ -20,7 +20,7 @@ log.info """\
         """
         .stripIndent()
 
-process entry {
+process pod_1 {
     pod = [
             [env: 'msg', value: 'Hello-World.!'],
             [
@@ -31,16 +31,35 @@ process entry {
         ]
 
     input:
-        val xin from commands
+        val pod_1_xin from commands
 
     output:
-        val xout into receiver
+        val pod_1_xout into pod_1_receiver
 
     script:
-        xout = xin
+        pod_1_xout = pod_1_xin
+}
+
+process pod_2 {
+    pod = [
+            [
+                volumeClaim: "${params.volumeClaim}",
+                mountPath: "${params.mountPath}",
+                subPath: "${params.subPath}"
+            ]
+        ]
+
+    input:
+        val pod_2_xin from pod_1_receiver
+
+    output:
+        val pod_2_xout into pod_2_receiver
+
+    script:
+        pod_2_xout = pod_2_xin
         template 'main.sh'
 }
 
-receiver.view {
+pod_2_receiver.view {
     xout -> "$xout"
 }

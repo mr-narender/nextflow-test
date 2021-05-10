@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "Processing... [$xin]"
+echo "Processing... [$pod_2_xin]"
